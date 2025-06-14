@@ -2,6 +2,7 @@
   "name": "ticket-booking-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://natasha01013.github.io/ticket-booking-app/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@testing-library/dom": "^10.4.0",
