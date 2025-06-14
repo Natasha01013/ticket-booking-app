@@ -1,0 +1,11 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-page__content {
+    position: relative;
+    padding-top: 144px;
+    flex: 1 0 auto;
+}
