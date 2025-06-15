@@ -5,7 +5,7 @@ import MainPage from "./pages/MainPage/MainPage";
 
 function App() {
   return (
-    <BrowserRouter >
+    <BrowserRouter basename="/ticket-booking-app">
       <Routes>
         <Route path="/" element={<MainPage />} />
       </Routes>
