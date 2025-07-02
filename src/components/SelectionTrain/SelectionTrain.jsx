@@ -8,7 +8,7 @@ import { setFilteredCount } from "../../store/getTrainsSlice";
 
 const SelectionTrain = () => {
   const dispatch = useDispatch();
-  const { error, items } = useSelector((state) => state.trains);
+  const { items } = useSelector((state) => state.trains);
   const filters = useSelector((state) => state.filter);
   const [trains, setTrains] = useState([]);
   
@@ -42,10 +42,10 @@ const SelectionTrain = () => {
       const minPrice = filters.price_from || 0;
       const maxPrice = filters.price_to || Infinity;
       
-      const hasValidPrice = train.departure.have_first_class && train.departure.price_info.first?.bottom_price >= minPrice && train.departure.price_info.first?.bottom_price <= maxPrice ||
-                          train.departure.have_second_class && train.departure.price_info.second?.bottom_price >= minPrice && train.departure.price_info.second?.bottom_price <= maxPrice ||
-                          train.departure.have_third_class && train.departure.price_info.third?.bottom_price >= minPrice && train.departure.price_info.third?.bottom_price <= maxPrice ||
-                          train.departure.have_fourth_class && train.departure.price_info.fourth?.bottom_price >= minPrice && train.departure.price_info.fourth?.bottom_price <= maxPrice;
+      const hasValidPrice = (train.departure.have_first_class && train.departure.price_info.first?.bottom_price >= minPrice && train.departure.price_info.first?.bottom_price <= maxPrice) ||
+                          (train.departure.have_second_class && train.departure.price_info.second?.bottom_price >= minPrice && train.departure.price_info.second?.bottom_price <= maxPrice) ||
+                          (train.departure.have_third_class && train.departure.price_info.third?.bottom_price >= minPrice && train.departure.price_info.third?.bottom_price <= maxPrice) ||
+                          (train.departure.have_fourth_class && train.departure.price_info.fourth?.bottom_price >= minPrice && train.departure.price_info.fourth?.bottom_price <= maxPrice);
 
       const hasValidClass = (!filters.have_first_class || train.departure.have_first_class) &&
                           (!filters.have_second_class || train.departure.have_second_class) &&

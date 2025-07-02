@@ -6,7 +6,7 @@ import "./PassangerCard.css";
 import PassangerDocs from "./components/PassangerDocs";
 import {
   validateBirthNumber,
-  validateDate,
+  // validateDate,
   validatePassportNumber,
   validatePassportSeries,
 } from "../../utils/validators";

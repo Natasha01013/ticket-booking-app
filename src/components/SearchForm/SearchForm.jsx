@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./SearchForm.css";
 import { clearCity, getCity } from "../../store/getCitySlice";
@@ -38,7 +38,7 @@ const SearchForm = ({ name }) => {
     });
   }, [fromDate, toDate]);
 
-  const searchCity = async (value, setResults) => {
+  const searchCity = useCallback(async (value, setResults) => {
     if (value.trim().length > 0) {
       const response = await dispatch(getCity(value));
       if (response.payload) {
@@ -47,7 +47,7 @@ const SearchForm = ({ name }) => {
     } else {
       setResults([]);
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     let timeoutId;
@@ -59,7 +59,7 @@ const SearchForm = ({ name }) => {
       setSearchResultsFrom([]);
     }
     return () => clearTimeout(timeoutId);
-  }, [city.from, dispatch]);
+  }, [city.from, dispatch, searchCity]);
 
   useEffect(() => {
     let timeoutId;
@@ -71,7 +71,7 @@ const SearchForm = ({ name }) => {
       setSearchResultsTo([]);
     }
     return () => clearTimeout(timeoutId);
-  }, [city.to, dispatch]);
+  }, [city.to, dispatch, searchCity]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
