@@ -1,0 +1,95 @@
+.filter-destination {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 31px;
+}
+
+.filter-destination__header {
+    display: flex;
+    width: 293px;
+    margin: 2px 35px 20px auto;
+}
+
+.filter-destination--backward .filter-destination__header {
+    margin: 4px 35px 20px auto;
+}
+
+.filter-destination__icon {
+    margin-right: 12px;
+}
+
+.filter-destination__title {
+    margin: 0;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.filter-destination__expander {
+    margin: 3px 0 0 auto;
+    cursor: pointer;
+}
+
+.filter-destination--backward .filter-destination__expander {
+    margin-top: 9px;
+}
+
+.filter-destination__departure,
+.filter-destination__arrival {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 34px 50px auto;
+}
+
+.filter-destination__arrival {
+    margin-bottom: 0;
+}
+
+.filter-destination__departure-title,
+.filter-destination__arrival-title {
+    margin: 0 0 16px 4px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.filter-destination--backward .filter-destination__departure-title {
+    margin: 0 0 16px 3px;
+}
+
+.filter-destination__arrival-title {
+    margin: 0 0 19px 0;
+    text-align: right;
+}
+
+.filter-destination--backward .filter-destination__arrival-title {
+    margin-right: 1px;
+}
+
+.filter-destination__ranges--hidden {
+    display: none;
+}
+
+.filter-destination:last-of-type {
+    margin-bottom: 49px;
+}
+
+.filter-destination--collapsed {
+    margin-bottom: 13px;
+}
+
+.filter-destination--collapsed:last-of-type {
+    margin-bottom: 13px;
+}
+
+.filter-destination--collapsed .filter-destination__header {
+    margin-top: 4px;
+}
+
+.filter-destination--collapsed .filter-destination__expander {
+    margin: 6px -1px 0 auto;
+}
+
+.filter-destination--collapsed:last-of-type .filter-destination__header {
+    margin-top: 0;
+}
