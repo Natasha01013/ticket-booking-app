@@ -1,3 +1,5 @@
+// components/WidgetFilter/WidgetFilter.jsx
+
 import FilterTime from "../FilterTime/FilterTime";
 import LastTickets from "../LastTickets/LastTickets";
 import "./WidgetFilter.css";

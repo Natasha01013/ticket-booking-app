@@ -1,3 +1,5 @@
+// components/WidgetDetails/WidgetDetails.jsx
+
 import "./WidgetDetails.css";
 import WidgetDetailsPass from "./components/WidgetDetailsPass";
 import WidgetDetailsRoute from "./components/WidgetDetailsRoute";

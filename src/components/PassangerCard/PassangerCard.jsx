@@ -1,6 +1,6 @@
 // components/PassangerCard/PassangerCard.jsx
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import Header from "./components/Header";
 import PassangerInput from "./components/PassangerInput";
@@ -37,6 +37,15 @@ const PassangerCard = ({ show, count, onClose }) => {
   const [validate, setValidate] = useState(null);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+
+    // Добавляем useEffect для синхронизации локального состояния с Redux
+  // Это будет диспатчить обновленные данные пассажира в store/passangersSlice.js -> addPassanger
+  useEffect(() => {
+    // Диспатчим данные, но только если ID существует, чтобы избежать ошибок
+    if (passanger.id) {
+      dispatch(addPassanger(passanger));
+    }
+  }, [passanger, dispatch]); // Срабатывает при каждом изменении локального состояния 'passanger'
 
   const onChangeAge = (e) => {
     setPassanger((prevState) => ({

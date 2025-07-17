@@ -43,6 +43,7 @@ export const passangersSlice = createSlice({
             state.passanger = []; // Очищаем массив пассажиров
             state.orderPassanger = []; // Очищать orderPassanger тоже при сбросе пассажиров
             state.paymentMethod = ''; // Очищать способ оплаты
+            state.isInitialized = false;
         },
 
         setPassangersInitialized: (state) => {

@@ -1,5 +1,6 @@
 // pages/PassangersPage/PassangersPage.jsx
 
+import { useEffect } from 'react'; 
 import Banner from "../../components/Banner/Banner";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
@@ -11,21 +12,39 @@ import PassangerCard from "../../components/PassangerCard/PassangerCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import bannerImg from "../../assets/banner2.png";
-import { addPassanger, removePassanger } from "../../store/passangersSlice";
+import { addPassanger, removePassanger, setPassangersInitialized } from "../../store/passangersSlice";
 
 const PassangersPage = () => {
   const passengersInStore = useSelector((state) => state.passangers.passanger); // <--- Используем 'passangers' как имя слайса
+  const isInitialized = useSelector((state) => state.passangers.isInitialized); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Инициализация карточки пассажира при загрузке страницы
+    // Добавляем только одну карточку, если store пуст И страница еще не была инициализирована
+    useEffect(() => {
+        if (passengersInStore.length === 0 && !isInitialized) {
+            dispatch(addPassanger({ type: "adult" })); // Добавляем одну карточку взрослого
+            dispatch(setPassangersInitialized()); // Устанавливаем флаг, что инициализация произошла
+        }
+    }, [dispatch, isInitialized, passengersInStore.length]); // Зависимости для useEffect
+
   const handleNextClick = () => {
-    navigate("/payment");
+        if (passengersInStore.length > 0) {
+            navigate("/payment");
+        } else {
+            alert("Пожалуйста, добавьте хотя бы одного пассажира.");
+        }
   };
 
     //Обработчик удаления пассажира 
     const handleDeletePassenger = (id) => {
-        dispatch(removePassanger(id));
+        if (passengersInStore.length > 1) { // Не позволяем удалить последнюю карточку
+            dispatch(removePassanger(id));
+        } else {
+            alert("Нельзя удалить последнего пассажира.");
+        }
     };
 
     //Обработчик добавления нового пассажира 
@@ -54,6 +73,7 @@ const PassangersPage = () => {
                   key={passenger.id} // уникальный ключ для каждого элемента списка
                   count={index + 1} // Номер пассажира для отображения
                   show={true} // Каждая карточка из store должна быть показана
+                  passengerData={passenger}
                   // Передаем функцию, которая диспатчит удаление по ID пассажира
                   onClose={() => handleDeletePassenger(passenger.id)} 
               />
