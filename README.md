@@ -23,9 +23,9 @@ npm install
 npm start 
 ```
 
-Приложение будет доступно по адресу http://localhost:3000 
+Приложение будет доступно по адресу http://localhost:3000   
 
-### Скрипты
-`npm start` - Запуск в режиме разработки 
-`npm run build` - Сборка для продакшена 
-`npm run deploy` - Деплой на GitHub Pages 
+### Скрипты  
+* `npm start` - Запуск в режиме разработки   
+* `npm run build` - Сборка для продакшена    
+* `npm run deploy` - Деплой на GitHub Pages   
