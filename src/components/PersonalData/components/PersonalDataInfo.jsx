@@ -106,8 +106,6 @@ const PersonalDataInfo = ({ el }) => {
           inputClassName={"personal__input personal__input--margin-right"}
           value={formData.lastName}
           onChange={handleChange} // Используем унифицированный handleChange
-          // value={inputValue.lastName}
-          // onChange={onChange}
         />
         <PassangerInput
           name={"Имя"}
@@ -120,8 +118,6 @@ const PersonalDataInfo = ({ el }) => {
           inputClassName={"personal__input personal__input--margin-right"}
           value={formData.firstName}
           onChange={handleChange}
-          // value={inputValue.firstName}
-          // onChange={onChange}
         />
         <PassangerInput
           name={"Отчество"}
@@ -134,8 +130,6 @@ const PersonalDataInfo = ({ el }) => {
           inputClassName={"personal__input"}
           value={formData.patronymic}
           onChange={handleChange}
-          // value={inputValue.patronymic}
-          // onChange={onChange}
         />
       </div>
       <div className="personal__phone">
@@ -149,8 +143,6 @@ const PersonalDataInfo = ({ el }) => {
           inputClassName={"personal__input--contact"}
           value={formData.phone}
           onChange={handleChange}
-          // value={inputValue.phone}
-          // onChange={onChange}
         />
       </div>
       <div className="personal__email">
@@ -165,8 +157,6 @@ const PersonalDataInfo = ({ el }) => {
           inputClassName={"personal__input--contact"}
           value={formData.email}
           onChange={handleChange}
-          // value={inputValue.email}
-          // onChange={onChange}
         />
         </div>
       </div>

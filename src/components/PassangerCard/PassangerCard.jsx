@@ -21,7 +21,7 @@ const PassangerCard = ({ show, count, onClose, passengerData }) => {
     { value: "Детский", label: "Детский" },
   ];
   
-    // ИНИЦИАЛИЗИРУЕМ ЛОКАЛЬНОЕ СОСТОЯНИЕ ИЗ passengerData
+  // ИНИЦИАЛИЗИРУЕМ ЛОКАЛЬНОЕ СОСТОЯНИЕ ИЗ passengerData
   // Если passengerData есть, используем его, иначе - дефолты.
   const [passanger, setPassanger] = useState({
     id: passengerData?.id || Date.now() + Math.random(), // Генерируем ID здесь, если его нет (для первой пустой карточки)
@@ -41,7 +41,7 @@ const PassangerCard = ({ show, count, onClose, passengerData }) => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-    // Добавляем useEffect для синхронизации локального состояния с Redux
+  // Добавляем useEffect для синхронизации локального состояния с Redux
   // Это будет диспатчить обновленные данные пассажира в store/passangersSlice.js -> addPassanger
   useEffect(() => {
     // Диспатчим данные, но только если ID существует, чтобы избежать ошибок
@@ -146,7 +146,6 @@ const PassangerCard = ({ show, count, onClose, passengerData }) => {
     if (validateFields()) {
       setValidate(false);
       setError("Готово");
-      // dispatch(addPassanger(passanger));
     } else {
       setValidate(true);
     }
@@ -162,7 +161,6 @@ const PassangerCard = ({ show, count, onClose, passengerData }) => {
               <Select
                 className="passenger__age-control"
                 options={options}
-                // defaultValue={options[0]}
                 defaultValue={options.find(option => option.value === passanger.age)} 
                 isSearchable={false}
                 onChange={onChangeAge}
