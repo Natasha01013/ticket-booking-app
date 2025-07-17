@@ -1,3 +1,6 @@
+// components/WidgetDetails/components/WidgetDetailsRoute.jsx
+
+import { useState } from 'react';
 import {
   datetimeToDate,
   msConversion,
@@ -17,14 +20,28 @@ const WidgetDetailsRoute = ({
   stationTo,
   duration,
 }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false); // Изначально развернуто (минус)
+
+  const toggleCollapse = () => { // <--- ДОБАВЛЕНО ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <div className="widget__route">
       <div className="widget__route-header">
         <div className={`widget__icon ${route === 'back' ? 'widget__icon--back' : ''}`}></div>
         <h4 className="widget__header-title">{route === 'back' ? 'Обратно' : 'Туда'}</h4>
         <div className="widget__date">{datetimeToDate(dateFrom)}</div>
-        <div className="widget__toggle"></div>
+        <div 
+          // Если isCollapsed true (свернуто), применяем widget__toggle--show (плюс)
+          // Если isCollapsed false (развернуто), оставляем базовый widget__toggle (минус)
+          className={`widget__toggle ${isCollapsed ? 'widget__toggle--show' : ''}`}
+          onClick={toggleCollapse}
+        ></div>
       </div>
+      {/* Условный рендеринг: показываем содержимое только если не свернуто */}
+      {!isCollapsed && ( // <--- УСЛОВНЫЙ РЕНДЕРИНГ
+        <>
       <div className="widget__route-content">
         <div className="widget__train-info">
           <h4 className="widget__train-label">№ Поезда</h4>
@@ -60,6 +77,8 @@ const WidgetDetailsRoute = ({
           </div>
         </div>
       </div>
+      </>
+      )}
     </div>
   );
 };
