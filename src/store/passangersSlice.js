@@ -37,9 +37,6 @@ export const passangersSlice = createSlice({
             state.passanger = state.passanger.filter(
                 (p) => p.id !== idToRemove
             );
-            // if (state.passanger.length === 0) {
-            //     state.isInitialized = false;
-            // }
         },
 
         clearPassangers: (state) => {
@@ -55,16 +52,10 @@ export const passangersSlice = createSlice({
         addOrderPassanger: (state, { payload }) => {
             // Проверяем, существует ли уже пассажир с такими же данными
             const existingPassengerIndex = state.orderPassanger.findIndex(
-                // p => p.firstName === payload.firstName && 
-                //      p.lastName === payload.lastName && 
-                //      p.patronymic === payload.patronymic
                 p => p.id === payload.id // <--- Ищем по ID
             );
 
             if (existingPassengerIndex !== -1) {
-                // Обновляем существующего пассажира
-                // state.orderPassanger = state.orderPassanger.map((p, index) => 
-                //     index === existingPassengerIndex ? payload : p
                state.orderPassanger[existingPassengerIndex] = {
                 ...state.orderPassanger[existingPassengerIndex], // Сохраняем старые данные, если они есть
                 ...payload // Применяем новые данные

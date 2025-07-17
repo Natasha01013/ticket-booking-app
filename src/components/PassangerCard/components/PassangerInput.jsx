@@ -20,10 +20,7 @@ const PassangerInput = ({
         className={inputClassName}
         type={type}
         id={id}
-
         name={id}
-
-        
         value={value}
         placeholder={ph}
         onChange={onChange}

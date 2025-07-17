@@ -1,3 +1,5 @@
+// components/SelectionSeat/SelectionSeat.jsx
+
 import { useDispatch, useSelector } from "react-redux";
 import SeatAmount from "./components/SeatAmount";
 import SeatCarriage from "./components/SeatCarriage/SeatCarriage";
