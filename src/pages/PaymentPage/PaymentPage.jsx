@@ -1,4 +1,6 @@
 // pages/PaymentPage/PaymentPage.jsx
+// страница для ввода ФИО, телефона, почты пассажира и выбора способа оплаты
+
 import Banner from "../../components/Banner/Banner";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";

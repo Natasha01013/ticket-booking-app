@@ -1,3 +1,5 @@
+// components/ValidatePassangers/components/PassangerCards.jsx
+
 import PassangerCard from "./PassangerCard";
 
 const PassangersCards = ({ passangers }) => {

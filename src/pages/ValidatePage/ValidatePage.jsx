@@ -1,3 +1,6 @@
+// pages/ValidatePage/ValidatePage.jsx
+// страница для проверки данных перед подтвеждением заказа
+
 import "./ValidatePage.css";
 import Header from "../../components/Header/Header";
 import Banner from "../../components/Banner/Banner";

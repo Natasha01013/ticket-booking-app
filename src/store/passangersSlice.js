@@ -15,7 +15,7 @@ export const passangersSlice = createSlice({
     reducers: {
         addPassanger: (state, { payload }) => {
             //Генерируем уникальный ID для каждого нового пассажира 
-            const newPassenger = {
+            const passengerToUpdate = {
                 // Добавляем дефолтные значения, если они не пришли с payload
                 age: "Взрослый", // Дефолтное значение
                 name: "",
@@ -30,7 +30,18 @@ export const passangersSlice = createSlice({
                 ...payload,
                 id: payload.id || Date.now() + Math.random(), // Используем переданный ID или генерируем новый
             };
-            state.passanger = [...state.passanger, newPassenger];
+            // state.passanger = [...state.passanger, newPassenger];
+            const existingPassengerIndex = state.passanger.findIndex(
+                p => p.id === passengerToUpdate.id
+            );
+
+            if (existingPassengerIndex !== -1) {
+                // Если пассажир с таким ID уже есть, обновляем его данные
+                state.passanger[existingPassengerIndex] = passengerToUpdate;
+            } else {
+                // Иначе добавляем нового пассажира
+                state.passanger.push(passengerToUpdate); // Используем push для добавления в конец
+            }
         },
 
         removePassanger: (state, { payload: idToRemove }) => {

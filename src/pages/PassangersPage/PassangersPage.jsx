@@ -1,4 +1,5 @@
 // pages/PassangersPage/PassangersPage.jsx
+// Страница ввода данных пассажиров
 
 import { useEffect } from 'react'; 
 import Banner from "../../components/Banner/Banner";

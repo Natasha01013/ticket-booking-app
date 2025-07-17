@@ -1,3 +1,5 @@
+// components/ValidatePassangers/ValidatePassangers.jsx
+
 import { useSelector } from "react-redux";
 import "./ValidatePassangers.css";
 import PassangersCards from "./components/PassangersCards";

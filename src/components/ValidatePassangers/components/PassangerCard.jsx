@@ -1,3 +1,5 @@
+// components/ValidatePassangers/components/PassangerCard.jsx
+
 const PassangerCard = ({
   age,
   surname,

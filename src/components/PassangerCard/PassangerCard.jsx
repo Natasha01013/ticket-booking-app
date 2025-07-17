@@ -15,13 +15,16 @@ import { useDispatch } from "react-redux";
 import { addPassanger } from "../../store/passangersSlice";
 import Error from "./components/Error";
 
-const PassangerCard = ({ show, count, onClose }) => {
+const PassangerCard = ({ show, count, onClose, passengerData }) => {
   const options = [
     { value: "Взрослый", label: "Взрослый" },
     { value: "Детский", label: "Детский" },
   ];
   
+    // ИНИЦИАЛИЗИРУЕМ ЛОКАЛЬНОЕ СОСТОЯНИЕ ИЗ passengerData
+  // Если passengerData есть, используем его, иначе - дефолты.
   const [passanger, setPassanger] = useState({
+    id: passengerData?.id || Date.now() + Math.random(), // Генерируем ID здесь, если его нет (для первой пустой карточки)
     age: "Взрослый",
     name: "",
     surname: "",
@@ -143,7 +146,7 @@ const PassangerCard = ({ show, count, onClose }) => {
     if (validateFields()) {
       setValidate(false);
       setError("Готово");
-      dispatch(addPassanger(passanger));
+      // dispatch(addPassanger(passanger));
     } else {
       setValidate(true);
     }
@@ -159,7 +162,8 @@ const PassangerCard = ({ show, count, onClose }) => {
               <Select
                 className="passenger__age-control"
                 options={options}
-                defaultValue={options[0]}
+                // defaultValue={options[0]}
+                defaultValue={options.find(option => option.value === passanger.age)} 
                 isSearchable={false}
                 onChange={onChangeAge}
               />
