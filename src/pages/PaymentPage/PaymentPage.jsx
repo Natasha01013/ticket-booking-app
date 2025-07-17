@@ -27,9 +27,6 @@ const PaymentPage = () => {
       passenger.patronymic &&
       passenger.phone &&  
       passenger.email
-      // passenger.birthday &&
-      // passenger.documentType &&
-      // passenger.documentNumber
     );
     return isValid;
   };

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import PassangerInput from "../../PassangerCard/components/PassangerInput";
 import { useDispatch } from "react-redux";
 import { addOrderPassanger } from "../../../store/passangersSlice";
-// import { validatePhoneNumber, validateEmail } from "../../../utils/validators";
 
 const PersonalDataInfo = ({ el }) => {
   const dispatch = useDispatch();
@@ -17,37 +16,9 @@ const PersonalDataInfo = ({ el }) => {
       patronymic: el?.father || "",
       phone: "",
       email: "",
-    // birthday: el?.birthday || "",
-    // documentType: el?.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
-    // documentNumber: el?.age === "Взрослый" ? 
-    //   `${el?.series || ""} ${el?.number || ""}`.trim() : 
-    //   el?.birthNumber || ""
   });
 
-
-
-  // const onChange = (e) => {
-  //   const { id, value } = e.target;
-  //   const newValue = {
-  //     ...inputValue,
-  //     [id === "surname" ? "lastName" : 
-  //       id === "name" ? "firstName" : 
-  //       id === "father" ? "patronymic" : 
-  //       id === "phone" ? "phone" : 
-  //       id === "email" ? "email" : id]: value
-  //   };
-  //   setInputValue(newValue);
-    
-  //   const isPhoneValid = validatePhoneNumber(id === "phone" ? value : inputValue.phone);
-  //   const isEmailValid = validateEmail(id === "email" ? value : inputValue.email);
-    
-  //   if (isPhoneValid && isEmailValid) {
-  //     dispatch(addOrderPassanger(newValue));
-  //   }
-  // };
-
   useEffect(() => {
-       // const initialValue = {
       if (el && el.id) { // Убедимся, что el и el.id существуют
         setFormData(prev => ({
           ...prev,
@@ -57,14 +28,7 @@ const PersonalDataInfo = ({ el }) => {
           patronymic: el.father || "",
           phone: "",
           email: "",
-          // birthday: el.birthday || "",
-          // documentType: el.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
-          // documentNumber: el.age === "Взрослый" ? 
-          //   `${el.series || ""} ${el.number || ""}`.trim() : 
-          //   el.birthNumber || ""
-        
         }));
-    //   setInputValue(initialValue);
             dispatch(addOrderPassanger({
                 id: el.id,
                 firstName: el.name || "",
@@ -73,20 +37,19 @@ const PersonalDataInfo = ({ el }) => {
                 phone: "", // Добавляем пустые поля для телефона и email
                 email: ""
             }));
-        }
-    }, [el, dispatch]);
+      }
+  }, [el, dispatch]);
 
-//добавила новую 
-      const handleChange = (e) => {
-        const { name, value } = e.target; // Получаем name и value напрямую из события
-        const updatedFormData = {
-            ...formData,
-            [name]: value
-        };
-        setFormData(updatedFormData);
-        // Всегда диспатчим обновленные данные. Валидация будет на PaymentPage.
-        dispatch(addOrderPassanger(updatedFormData));
-    };
+  const handleChange = (e) => {
+      const { name, value } = e.target; // Получаем name и value напрямую из события
+      const updatedFormData = {
+          ...formData,
+          [name]: value
+      };
+      setFormData(updatedFormData);
+      // Всегда диспатчим обновленные данные. Валидация будет на PaymentPage.
+      dispatch(addOrderPassanger(updatedFormData));
+  };
 
   if (!el) {
     return null;

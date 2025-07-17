@@ -30,7 +30,7 @@ export const passangersSlice = createSlice({
                 ...payload,
                 id: payload.id || Date.now() + Math.random(), // Используем переданный ID или генерируем новый
             };
-            // state.passanger = [...state.passanger, newPassenger];
+
             const existingPassengerIndex = state.passanger.findIndex(
                 p => p.id === passengerToUpdate.id
             );

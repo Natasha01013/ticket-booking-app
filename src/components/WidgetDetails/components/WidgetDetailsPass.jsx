@@ -8,7 +8,7 @@ import { totalSum } from "../../../utils/selectionWagon";
 const WidgetDetailsPass = ({ depPass, arrPass }) => {
   const [isCollapsed, setIsCollapsed] = useState(false); // Изначально развернуто (минус)
 
-  const toggleCollapse = () => { // <--- ДОБАВЛЕНО ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ
+  const toggleCollapse = () => { 
     setIsCollapsed(!isCollapsed);
   };
 
@@ -23,7 +23,6 @@ const WidgetDetailsPass = ({ depPass, arrPass }) => {
       <div className="widget__passenger-header">
         <div className="widget__icon widget__icon--passenger"></div>
         <h4 className="widget__header-title">Пассажиры</h4>
-        {/* Добавляем обработчик onClick и класс для стилизации кнопки */}
         <div 
           // Если isCollapsed true (свернуто), применяем widget__toggle--show (плюс)
           // Если isCollapsed false (развернуто), оставляем базовый widget__toggle (минус)

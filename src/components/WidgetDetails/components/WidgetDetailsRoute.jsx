@@ -22,7 +22,7 @@ const WidgetDetailsRoute = ({
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false); // Изначально развернуто (минус)
 
-  const toggleCollapse = () => { // <--- ДОБАВЛЕНО ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ
+  const toggleCollapse = () => { 
     setIsCollapsed(!isCollapsed);
   };
 

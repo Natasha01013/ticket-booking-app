@@ -23,7 +23,7 @@ const PassangersPage = () => {
   const dispatch = useDispatch();
 
   // Инициализация карточки пассажира при загрузке страницы
-    // Добавляем только одну карточку, если store пуст И страница еще не была инициализирована
+  // Добавляем только одну карточку, если store пуст И страница еще не была инициализирована
     useEffect(() => {
         if (passengersInStore.length === 0 && !isInitialized) {
             dispatch(addPassanger({ type: "adult" })); // Добавляем одну карточку взрослого
