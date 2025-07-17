@@ -1,3 +1,4 @@
+// pages/PaymentPage/PaymentPage.jsx
 import Banner from "../../components/Banner/Banner";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -12,8 +13,8 @@ import bannerImg from "../../assets/banner2.png";
 import { useState } from "react";
 
 const PaymentPage = () => {
-  const { orderPassanger } = useSelector((state) => state.passanger);
-  const { paymentMethod } = useSelector((state) => state.passanger);
+  const { orderPassanger } = useSelector((state) => state.passangers);
+  const { paymentMethod } = useSelector((state) => state.passangers);
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -22,9 +23,11 @@ const PaymentPage = () => {
       passenger.firstName &&
       passenger.lastName &&
       passenger.patronymic &&
-      passenger.birthday &&
-      passenger.documentType &&
-      passenger.documentNumber
+      passenger.phone &&  
+      passenger.email
+      // passenger.birthday &&
+      // passenger.documentType &&
+      // passenger.documentNumber
     );
     return isValid;
   };

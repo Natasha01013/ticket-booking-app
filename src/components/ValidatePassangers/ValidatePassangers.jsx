@@ -6,7 +6,7 @@ import { selectSelectedSeat } from "../../store/getSeatsSlice";
 import { totalSum } from "../../utils/selectionWagon";
 
 const ValidatePassangers = () => {
-  const { passanger } = useSelector((state) => state.passanger);
+  const { passanger } = useSelector((state) => state.passangers);
   const seatsDep = useSelector(selectSelectedSeat).departure;
   const seatsArr = useSelector(selectSelectedSeat).arrival;
   const navigate = useNavigate();

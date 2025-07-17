@@ -155,6 +155,26 @@ const SearchForm = ({ name }) => {
     }
   };
 
+
+  //ФУНКЦИЯ ДЛЯ ОБМЕНА ГОРОДАМИ
+  const handleSwapCities = () => {
+  //Меняем местами значения в локальном состоянии `city`
+    setCity(prev => ({
+      from: prev.to,
+      to: prev.from
+    }));
+
+  // Меняем местами выбранные города в Redux store
+    const tempFromCity = fromCity;
+    dispatch(choiceCityFrom(toCity));
+    dispatch(choiceCityTo(tempFromCity));
+
+  //Очищаем результаты поиска, так как города изменились
+    setSearchResultsFrom([]);
+    setSearchResultsTo([]);
+    setShow({ from: false, to: false }); // Закрываем списки результатов
+  };
+
   return (
     <div className={`search-form search-form--${name}`}>
       <div className="search-form__container">
@@ -183,7 +203,7 @@ const SearchForm = ({ name }) => {
                 </div>
               )}
             </div>
-            <div className="search-form__route-icon"></div>
+            <div className="search-form__route-icon" onClick={handleSwapCities}></div>
             <div className="search-form__route-wrapper">
             <input
               value={city.to}

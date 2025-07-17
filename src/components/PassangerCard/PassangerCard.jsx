@@ -6,7 +6,6 @@ import "./PassangerCard.css";
 import PassangerDocs from "./components/PassangerDocs";
 import {
   validateBirthNumber,
-  // validateDate,
   validatePassportNumber,
   validatePassportSeries,
 } from "../../utils/validators";
@@ -14,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { addPassanger } from "../../store/passangersSlice";
 import Error from "./components/Error";
 
-const PassangerCard = ({ show, count }) => {
+const PassangerCard = ({ show, count, onClose }) => {
   const options = [
     { value: "Взрослый", label: "Взрослый" },
     { value: "Детский", label: "Детский" },
@@ -60,9 +59,16 @@ const PassangerCard = ({ show, count }) => {
 
   const onChangeInput = (e) => {
     const { value, id } = e.target;
+    let newValue = value;
+
+    // Фильтрация только для серии и номера паспорта
+    if (id === 'series' || id === 'number') {
+      newValue = value.replace(/\D/g, ''); // Удаляем все, кроме цифр
+    }
+
     setPassanger((prevState) => ({
       ...prevState,
-      [id]: value,
+      [id]: newValue,
     }));
   };
 
@@ -87,6 +93,7 @@ const PassangerCard = ({ show, count }) => {
   };
 
   const validateFields = () => {
+    setError(""); // Сбрасываем ошибку перед новой валидацией
     if (!checkEmptyFields(passanger)) {
       setError("Заполните все обязательные поля");
       return false;
@@ -98,7 +105,7 @@ const PassangerCard = ({ show, count }) => {
     }
 
     if (!validateBirthday(passanger.birthday)) {
-      setError("Неверный формат даты рождения");
+      setError("Неверный формат даты рождения (ДД/ММ/ГГГГ)");
       return false;
     }
 
@@ -113,7 +120,7 @@ const PassangerCard = ({ show, count }) => {
       }
     } else {
       if (!validateBirthNumber(passanger.birthNumber)) {
-        setError("Неверный формат свидетельства о рождении");
+        setError("Неверный формат свидетельства о рождении (например, I-АБ 123456)");
         return false;
       }
     }
@@ -133,7 +140,7 @@ const PassangerCard = ({ show, count }) => {
 
   return (
     <div className="passenger">
-      <Header count={count} />
+      <Header count={count} onClickDelete={onClose} />
       {show && (
         <div className="passenger__content">
           <div className="passenger__main">

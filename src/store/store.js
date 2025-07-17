@@ -20,6 +20,6 @@ export const store = configureStore({
         filter: getFilterSlice,
         trainSeat: getTrainSeatSlice,
         seats: getSeatsSlice,
-        passanger: passangersSlice
+        passangers: passangersSlice
     }
 })

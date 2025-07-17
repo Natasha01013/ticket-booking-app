@@ -1,63 +1,92 @@
+// components/PersonalData/components/PersonalDataInfo.jsx
+
 import { useEffect, useState } from "react";
 import PassangerInput from "../../PassangerCard/components/PassangerInput";
 import { useDispatch } from "react-redux";
 import { addOrderPassanger } from "../../../store/passangersSlice";
-import { validatePhoneNumber, validateEmail } from "../../../utils/validators";
+// import { validatePhoneNumber, validateEmail } from "../../../utils/validators";
 
 const PersonalDataInfo = ({ el }) => {
-  const [inputValue, setInputValue] = useState({
-    firstName: el?.name || "",
-    lastName: el?.surname || "",
-    patronymic: el?.father || "",
-    phone: "",
-    email: "",
-    birthday: el?.birthday || "",
-    documentType: el?.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
-    documentNumber: el?.age === "Взрослый" ? 
-      `${el?.series || ""} ${el?.number || ""}`.trim() : 
-      el?.birthNumber || ""
-  });
-
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    const { id, value } = e.target;
-    const newValue = {
-      ...inputValue,
-      [id === "surname" ? "lastName" : 
-        id === "name" ? "firstName" : 
-        id === "father" ? "patronymic" : 
-        id === "phone" ? "phone" : 
-        id === "email" ? "email" : id]: value
-    };
-    setInputValue(newValue);
+  // const [inputValue, setInputValue] = useState({
+    const [formData, setFormData] = useState({
+      id: el?.id, // Важно: ID пассажира для Redux
+      firstName: el?.name || "",
+      lastName: el?.surname || "",
+      patronymic: el?.father || "",
+      phone: "",
+      email: "",
+    // birthday: el?.birthday || "",
+    // documentType: el?.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
+    // documentNumber: el?.age === "Взрослый" ? 
+    //   `${el?.series || ""} ${el?.number || ""}`.trim() : 
+    //   el?.birthNumber || ""
+  });
+
+
+
+  // const onChange = (e) => {
+  //   const { id, value } = e.target;
+  //   const newValue = {
+  //     ...inputValue,
+  //     [id === "surname" ? "lastName" : 
+  //       id === "name" ? "firstName" : 
+  //       id === "father" ? "patronymic" : 
+  //       id === "phone" ? "phone" : 
+  //       id === "email" ? "email" : id]: value
+  //   };
+  //   setInputValue(newValue);
     
-    const isPhoneValid = validatePhoneNumber(id === "phone" ? value : inputValue.phone);
-    const isEmailValid = validateEmail(id === "email" ? value : inputValue.email);
+  //   const isPhoneValid = validatePhoneNumber(id === "phone" ? value : inputValue.phone);
+  //   const isEmailValid = validateEmail(id === "email" ? value : inputValue.email);
     
-    if (isPhoneValid && isEmailValid) {
-      dispatch(addOrderPassanger(newValue));
-    }
-  };
+  //   if (isPhoneValid && isEmailValid) {
+  //     dispatch(addOrderPassanger(newValue));
+  //   }
+  // };
 
   useEffect(() => {
-    if (el) {
-      const initialValue = {
-        firstName: el.name || "",
-        lastName: el.surname || "",
-        patronymic: el.father || "",
-        phone: "",
-        email: "",
-        birthday: el.birthday || "",
-        documentType: el.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
-        documentNumber: el.age === "Взрослый" ? 
-          `${el.series || ""} ${el.number || ""}`.trim() : 
-          el.birthNumber || ""
-      };
-      setInputValue(initialValue);
-      dispatch(addOrderPassanger(initialValue));
-    }
-  }, [el, dispatch]);
+       // const initialValue = {
+      if (el && el.id) { // Убедимся, что el и el.id существуют
+        setFormData(prev => ({
+          ...prev,
+          id: el.id, // Убедиться, что ID всегда обновляется
+          firstName: el.name || "",
+          lastName: el.surname || "",
+          patronymic: el.father || "",
+          phone: "",
+          email: "",
+          // birthday: el.birthday || "",
+          // documentType: el.age === "Взрослый" ? "Паспорт" : "Свидетельство о рождении",
+          // documentNumber: el.age === "Взрослый" ? 
+          //   `${el.series || ""} ${el.number || ""}`.trim() : 
+          //   el.birthNumber || ""
+        
+        }));
+    //   setInputValue(initialValue);
+            dispatch(addOrderPassanger({
+                id: el.id,
+                firstName: el.name || "",
+                lastName: el.surname || "",
+                patronymic: el.father || "",
+                phone: "", // Добавляем пустые поля для телефона и email
+                email: ""
+            }));
+        }
+    }, [el, dispatch]);
+
+//добавила новую 
+      const handleChange = (e) => {
+        const { name, value } = e.target; // Получаем name и value напрямую из события
+        const updatedFormData = {
+            ...formData,
+            [name]: value
+        };
+        setFormData(updatedFormData);
+        // Всегда диспатчим обновленные данные. Валидация будет на PaymentPage.
+        dispatch(addOrderPassanger(updatedFormData));
+    };
 
   if (!el) {
     return null;
@@ -68,65 +97,80 @@ const PersonalDataInfo = ({ el }) => {
       <div className="personal__info">
         <PassangerInput
           name={"Фамилия"}
-          id={"surname"}
+          // id={"surname"}
+          id={"lastName"} // Имя для поля в Redux
           ph={"Фамилия"}
           type={"text"}
           labelClassName={"personal__field"}
           pClassName={"personal__field"}
           inputClassName={"personal__input personal__input--margin-right"}
-          value={inputValue.lastName}
-          onChange={onChange}
+          value={formData.lastName}
+          onChange={handleChange} // Используем унифицированный handleChange
+          // value={inputValue.lastName}
+          // onChange={onChange}
         />
         <PassangerInput
           name={"Имя"}
-          id={"name"}
+          // id={"name"}
+          id={"firstName"} // Имя для поля в Redux
           ph={"Имя"}
           type={"text"}
           labelClassName={"personal__field"}
           pClassName={"personal__field"}
           inputClassName={"personal__input personal__input--margin-right"}
-          value={inputValue.firstName}
-          onChange={onChange}
+          value={formData.firstName}
+          onChange={handleChange}
+          // value={inputValue.firstName}
+          // onChange={onChange}
         />
         <PassangerInput
           name={"Отчество"}
-          id={"father"}
+          id={"patronymic"} // Имя для поля в Redux
+          // id={"father"}
           ph={"Отчество"}
           type={"text"}
           labelClassName={"personal__field"}
           pClassName={"personal__field"}
           inputClassName={"personal__input"}
-          value={inputValue.patronymic}
-          onChange={onChange}
+          value={formData.patronymic}
+          onChange={handleChange}
+          // value={inputValue.patronymic}
+          // onChange={onChange}
         />
       </div>
       <div className="personal__phone">
         <PassangerInput
           name={"Контактный телефон"}
-          id={"phone"}
+          // id={"phone"}
+          id={"phone"} // Имя для поля в Redux
           ph={"+7 ___ ___ __ __"}
           type={"text"}
           pClassName={"personal__field"}
           inputClassName={"personal__input--contact"}
-          value={inputValue.phone}
-          onChange={onChange}
+          value={formData.phone}
+          onChange={handleChange}
+          // value={inputValue.phone}
+          // onChange={onChange}
         />
       </div>
       <div className="personal__email">
         <PassangerInput
           name={"Email"}
-          id={"email"}
+          id={"email"} // Имя для поля в Redux
+          // id={"email"}
           ph={"inbox@gmail.ru"}
           type={"text"}
           labelClassName={"personal__field"}
           pClassName={"personal__field"}
           inputClassName={"personal__input--contact"}
-          value={inputValue.email}
-          onChange={onChange}
+          value={formData.email}
+          onChange={handleChange}
+          // value={inputValue.email}
+          // onChange={onChange}
         />
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default PersonalDataInfo;

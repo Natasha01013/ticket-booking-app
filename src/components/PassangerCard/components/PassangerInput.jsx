@@ -1,3 +1,5 @@
+// components/PassangerCard/components/PassangerInput.jsx
+
 const PassangerInput = ({
   name,
   id,
@@ -8,6 +10,8 @@ const PassangerInput = ({
   titleClassName,
   inputClassName,
   value,
+  maxLength, 
+  pattern 
 }) => {
   return (
     <label className={labelClassName}>
@@ -16,9 +20,15 @@ const PassangerInput = ({
         className={inputClassName}
         type={type}
         id={id}
-        defaultValue={value}
+
+        name={id}
+
+        
+        value={value}
         placeholder={ph}
         onChange={onChange}
+        maxLength={maxLength} 
+        pattern={pattern} 
         required
       />
     </label>

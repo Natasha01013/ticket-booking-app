@@ -19,7 +19,8 @@ const PassangerDocs = ({ type, onChangeInput, series, number, birthNumber }) => 
                 ph="__  __  __  __"
                 onChange={onChangeInput}
                 value={series}
-                type="text"
+                type="tel"
+                maxLength={4}
                 labelClassName="passenger__input-wrapper"
                 titleClassName="passenger__docs-title"
                 inputClassName="passenger__docs-input"
@@ -32,7 +33,8 @@ const PassangerDocs = ({ type, onChangeInput, series, number, birthNumber }) => 
                 ph="__  __  __  __  __  __"
                 onChange={onChangeInput}
                 value={number}
-                type="text"
+                type="tel"
+                maxLength={6}
                 labelClassName="passenger__input-wrapper"
                 titleClassName="passenger__docs-title"
                 inputClassName="passenger__docs-input"
@@ -44,10 +46,11 @@ const PassangerDocs = ({ type, onChangeInput, series, number, birthNumber }) => 
             <PassangerInput
               id="birthNumber"
               name="Номер"
-              ph="_ _ _ _ _ _ _ _ _ _ _ _"
+              ph="XX-XX 123456"
               onChange={onChangeInput}
               value={birthNumber}
               type="text"
+              maxLength={12}
               labelClassName="passenger__input-wrapper"
               titleClassName="passenger__docs-title"
               inputClassName="passenger__docs-input"

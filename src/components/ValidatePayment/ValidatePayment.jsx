@@ -3,7 +3,7 @@ import "./ValidatePayment.css";
 import { useNavigate } from "react-router-dom";
 
 const ValidatePayment = () => {
-  const { paymentMethod } = useSelector((state) => state.passanger);
+  const { paymentMethod } = useSelector((state) => state.passangers);
   const navigate = useNavigate();
   
   const handleChangeClick = () => {

@@ -1,3 +1,5 @@
+// components/PersonalData/PersonalData.jsx
+
 import { useDispatch, useSelector } from "react-redux";
 import "./PersonalData.css";
 import PersonalDataInfo from "./components/PersonalDataInfo";
@@ -5,7 +7,7 @@ import { useEffect, useState } from "react";
 import { addPaymentMethod } from "../../store/passangersSlice";
 
 const PersonalData = () => {
-  const { passanger } = useSelector((state) => state.passanger);
+  const { passanger } = useSelector((state) => state.passangers);
   const [method, setMethod] = useState("");
   const dispatch = useDispatch();
 

@@ -10,7 +10,7 @@ import { totalSum } from "../../utils/selectionWagon";
 import bannerImg from "../../assets/banner3.png";
 
 const SuccessOrderPage = () => {
-  const { passanger } = useSelector((state) => state.passanger);
+  const { passanger } = useSelector((state) => state.passangers);
   const seatsDep = useSelector(selectSelectedSeat).departure;
   const seatsArr = useSelector(selectSelectedSeat).arrival;
   const [rating, setRating] = useState(0);

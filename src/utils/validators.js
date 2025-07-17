@@ -1,13 +1,3 @@
-export const validateDate = (string) => {
-    if (/^\d{2}\.\d{2}\.\d{4}$/.test(string)) {
-      const arrDate = string.split('.');
-      const dateNow = new Date().getTime();
-      const dateString = new Date(`${arrDate[2]}/${arrDate[1]}/${arrDate[0]}`).getTime();
-      return dateNow > dateString;
-    };
-    return false;
-};
-
 export const validatePassportSeries = (string) => {
     return /^\d{4}$/.test(string);
 };
@@ -17,7 +7,14 @@ export const validatePassportNumber = (string) => {
 };
 
 export const validateBirthNumber = (string) => {
-    return /^[v,i,x,m]{1,4}[а-я]{1,2}\d{6}$/.test(string);
+    // Убираем лишние пробелы и дефисы для нормализации перед валидацией
+    const normalizedString = string.trim().toUpperCase().replace(/[- ]/g, '');
+
+    // Формат: [Римские цифры до XV] [2 заглавные русские буквы] [6 цифр]
+    // Пример: IАБ123456, IIБВ765432
+    const preciseBirthCertRegex = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV)[А-ЯЁ]{2}\d{6}$/;
+
+    return preciseBirthCertRegex.test(normalizedString);
 };
 
 export const validatePhoneNumber = (number) => {
